@@ -58,7 +58,7 @@ public class ContatoService implements Serializable {
 
     public void deleteContato() {
         EManager.getInstance().getTransaction().begin();
-        EManager.getInstance().remove(this.contatoSelecionado);
+        EManager.getInstance().remove(EManager.getInstance().createNamedQuery("Contato.findById").setParameter("id", this.contatoSelecionado.getId()).getSingleResult());
         EManager.getInstance().getTransaction().commit();
         popupMessage_DeletaSucesso(this.contatoSelecionado.getNome());
         refreshContatos();
